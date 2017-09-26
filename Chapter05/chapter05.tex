@@ -1,0 +1,102 @@
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** Third Chapter **********************************
+%*******************************************************************************
+\chapter{Platform and experimental validation}
+
+% **************************** Define Graphics Path **************************
+\ifpdf
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+\else
+    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+\fi
+
+This chapter is devoted to the presentation of the experimental platform, including the
+MOCA room at GIPSA-lab, ground station, position estimation system and developed aerial platforms,
+as well as the presentation of the experimental results and their consequent analysis.
+
+First, to implement the position control law, the linear position of the system must be known, for this, the MOCA room was used.
+
+This one is composed by 12 cameras and a ground station, which allows the computation of the control inputs through MATLAB/
+Simulink and sends them to the system through radio signals. More details about this system are equally given in this chapter.
+
+During the developmen  of the work, different platforms were used in order to prove the algorithms comprising the different stages of the project.
+
+First, a Flexbot micro quadcopter was used in order to test the attitude and position
+control laws. The general performance of this model was good, however, when the camera system
+was added to test the position algorithm, the platform was not
+able to take off due to its reduced specifications. As a result of this, it was decided to
+move to a bigger platform.
+
+The second platform was the Flexbot micro-hexacopter. The technical specifications of
+flight controller board and motors were similar to the first one, but this model also offered
+two extra actuators and a bigger battery, in order to obtain more carrying capacity and
+autonomy.
+
+% This platform gave the opportunity to test the proposed method controller, the flight autonomy was not
+% enough to perform longer experimental tests. Face to this problem, some elements of the
+% platform were tuned in order to gain flight time. For the tuned prototype, the frame
+% was enlarged to host larger propellers, motors and battery and also these elements were
+% changed to increase the autonomy, the power and consequently the carrying capacity.
+% Since the new motors were feeded at different voltages, a voltage regulator was added
+% to feed the flight controller board.
+With this new model, new experimental tests were performed and the behaviour of the system was improved. The motors used until this
+point of the project were DC motors and their operational life is not so long, therefore,
+the performance of these ones were reduced drastically with each test.
+Finally, and due to the precedent problems, all the system was changed. Two different
+frames were totally designed and 3D printed. The flight controller board was changed, with
+better specifications in terms of processor and general performance. The DC motors were
+changed to brushless motors, to increase the power and carrying capacity. Consequently,
+the use of speed controllers for the motors was needed. The propellers were enlarged
+according to the specifications of the motors as well as the size of the battery.
+All the used platforms are described in the next subsections, some characteristics of
+each one are given, but only the last two, will be deeply detailed.
+After that, the experimental results are presented.
+
+
+\section{Moca Room and ground station}
+
+%In order to test the developed algorithms, it is necessary to know the attitude and linear position of the system in real time. For this, GIPSA-lab has the MOCA (motion capture) room.
+
+In order to test and to compare the proposed algorithm, it was made the platform integrated with the Vicon system and a terrestrial station . The Vicon system is used to obtain the orientation and the real position of the system. The ground station is concerned with calculating the position control and the velocity estimation algorithms.The image processing, which give us the pose of the system using the environment geometry, is done too in this part of the platform. The complete platform is useful to compare the results obtained with the proposed algorithm. In continuation it will be discussed in detail each part of this:
+
+
+\subsection{Moca Room}
+
+The motion acquisition is made through infrared cameras with emitters and receivers
+of infrared light and also through reflecting markers attached to the moving objects or
+individuals. The MOCA room is composed of 12 VICON© cameras (T40 series), attached
+to a metal structure in high and pointing their vision towards a common area. There are
+also 8 digital cameras pointing to the same area, but these ones are used for objects
+reconstruction or motion capture by image processing. With this system it is possible to
+compute the position and attitude up to 100Hz. Fig. 5.1 shows an image of the MOCA
+room and the reflecting markers.
+
+A VICON camera is an infrared camera, which emits and receives infrared rays. A
+set of cameras pointing towards a common area is able to detect a reflective marker. The
+markers are little balls of retro-reflecting materials going from 0.5 to 2cm. of diameter.
+The cameras emit a very special light which makes the receivers sensitive only to this one,
+when a marker is placed in the area covered by the cameras, it creates a single point in
+the plane of each one of the cameras (if the area is well covered). Then, the information is
+collected in a computer running the VICON© tracker software. Fig. 5.2 shows an image
+of the used VICON cameras and the VICON tracker environment.
+
+
+\subsection{Ground station}
+
+The ground station is composed by three computers: the first one is under the real time
+MATLAB/Simulink© environment, the second one a target PC, which is under the xPC target tool-
+box, as well as a radio-frequency emitter and
+The estimated states (attitude and position) are sent to MATLAB/Simulink through
+a UDP frame every 2ms. From these data, the position control algorithm is computed and
+implemented in real-time at 200Hz on the target PC, which uses the xPC target toolbox.
+xPC Target also manages communications between the host and target PC, as well as the
+different inputs/outputs of the real-time application.
+The control variables are finally sent back to the system through a GIPSA-lab’s built-in
+bridge that converts UDP frames to DSM2 protocol. For this, the radio-frequency emitter
+is used. Fig. 5.3 shows an overview of the computing process.
+
+\section{Experimental plattforms}
+\section{Experimental results}
+
+\section{Conclusions}

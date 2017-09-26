@@ -1,0 +1,22 @@
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The different categories of drones.\relax }}{5}{figure.caption.4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An Apache attack helicopter\relax }}{6}{figure.caption.5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces (a)Quadcopter and (b)octocopter configurations, courtesy of (\cite {website:dji})\relax }}{6}{figure.caption.6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Autogyro MT-03 in flight\relax }}{6}{figure.caption.7}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Gyrodyne AM-X3 in flight\relax }}{7}{figure.caption.8}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Convertiplane\relax }}{7}{figure.caption.9}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Tail-sitter prototypes, as part of the Google\IeC {\^a}\IeC {\texteuro }\IeC {\texttrademark }s project Wing for delivery\relax }}{8}{figure.caption.10}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces F-35 Lighting II combat aircraft during take off\relax }}{8}{figure.caption.11}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Scheme of the quadrotor configuration: inertial reference frame $N(x_n,y_n,z_n)$, the reference body fixed frame $B(x_b,y_b,z_b)$, the $f_i$ forces on each motor, angular velocity of the motors $s_{i}$ and the reaction torques $Q_i$.\relax }}{10}{figure.caption.12}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Roll ($\phi $), pitch ($\theta $), yaw ($\psi $) and space displacement\relax }}{11}{figure.caption.13}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Two coordinate frames, a point $p$, and two vectors $\upsilon _1$ and $\upsilon _2$, (\cite {Spong:2004}).\relax }}{12}{figure.caption.14}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Inertial and mobile frame of a rigid body.\relax }}{13}{figure.caption.15}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Euler angles.\relax }}{15}{figure.caption.16}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
