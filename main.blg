@@ -1,0 +1,15 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: main.aux
+A level-1 auxiliary file: Appendix1/appendix1.aux
+A level-1 auxiliary file: Appendix2/appendix2.aux
+A level-1 auxiliary file: Appendix3/appendix3.aux
+A level-1 auxiliary file: Appendix4/platforms.aux
+The style file: plainnat.bst
+Database file #1: biblio.bib
+Warning--entry type for "HoughMAtlab" isn't style-file defined
+--line 1305 of file biblio.bib
+Repeated entry---line 1402 of file biblio.bib
+ : @ article{Elloumi2014
+ :                      ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in Akinlar2011
+(There was 1 error message)

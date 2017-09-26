@@ -1,0 +1,235 @@
+
+
+\documentclass{bredele}
+%\usepackage{natbib}
+\usepackage{amsmath,amssymb,amsfonts,latexsym,cancel}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{natbib}        % required for bibliography
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{here}
+\usepackage{geometry}
+\usepackage{dblfloatfix}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepackage{multicol}
+\usepackage{kantlipsum} % for the mock text
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{url}
+
+%\setcounter{secnumdepth}{4}
+
+\setlength{\columnsep}{0.5cm}
+
+\def\refname{References}
+
+\newcommand{\includegraphicsSchema}[1]{\includegraphics[width=0.8\columnwidth]{figures/#1}}
+\newcommand{\includegraphicsSimu}[1]{\includegraphics[width=\columnwidth]{figures/#1}}
+
+\newcommand{\sect}[1]{section~\ref{#1}}
+\newcommand{\subsect}[1]{subsection~\ref{#1}}
+
+\newcommand{\fig}[1]{Fig.~\ref{#1}}
+\newcommand{\eqn}[1]{(\ref{#1})}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{proof}[theorem]{Proof}
+
+\title{Teleoperation et Navigation}
+
+\discipline{Automatique-Productique}
+
+\dirdethese{Nicolas Marchand}
+\codirdethese{Jos\'{e} Ernesto Gomez Balderas}
+\cocodirdethese{Pedro Casillo}
+\cocodirdethese{Amaury Negre}
+
+\titredudirdethese{CNRS}
+
+\jury{
+\begin{description}
+% \item[Rapporteur:] \textsc{Antonio FRANCHI}, Charg\'{e} de recherche, LAAS-CNRS, Toulouse,
+% \item[Rapporteur:] \textsc{Arturo ZAVALA RIO}, Charg\'{e} de recherche, Instituto Potosino de Investigación Científica y Tecnológica, A.C., S.L.P, Mexique,
+% \item[Examinateur:] \textsc{St\'{e}phan VIOLLET}, Directeur de recherche, ISM-CNRS, Marseille,
+% \item[Examinateur:] \textsc{Edouard LAROCHE}, Professeur, ICube - AVR, Strasbourg,
+% \item[Examinateur:] \textsc{Ahmad HABLY}, Ma\^{i}tre de conf\'{e}rences, GIPSA-Lab-CNRS, Grenoble.
+\end{description}
+}
+
+\author{Jos\'{e} Juan T\'{e}llez Guzm\'{a}n}
+
+\date{\today}
+
+\nomdeuniversite{Universit\'{e} de Grenoble}
+\logouniversite{figures/uga_logo_visuel} %nom du fichier
+\scalelogouniversite{0.24} % mise a l'echelle de l'image (0.5=50% par exemple)
+\logolabo{figures/GIPSA-lab_logo}
+\scalelogolabo{0.4}
+
+\unite{Automatique}
+\ecoledoc{\'{E}lectronique, \'{E}lectrotechnique, Automatique et Traitement du Signal (EEATS) }
+
+
+\usepackage[a4paper]{meta-donnees}
+\begin{document}
+
+
+% la ligne ci-dessous est à insérer obligatoirement dans le préambule du document avant \begin{document}
+
+% les lignes en bas sont à insérer obligatoirement après
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%             Commandes Meta-données               %%
+%%   à renseigner par les auteurs pour générer      %%
+%%     la couverture modèle Univ. Grenoble          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%      Fichier encodé au format ISO-8859-16        %%
+
+%\Sethpageshift{???mm}   %%optionnel : à décommenter si besoin pour ajout d'espace afin de center la couvérture horizontalement (valeur par défaut est -5.5mm)
+%\Setvpageshift{???mm}   %%optionnel : à décommenter si besoin pour ajout d'espace afin de center la couvérture verticalement (valeur par défaut est -15.5mm)
+
+
+% \Universite{Univsersit\'{e} de Grenoble}    %%optionnel : à décommenter et à renseigenr si vous voulez changer le non d'université
+% \Grade{DOCTEUR DE L'UNIVERSIT\'{E} DE GRENOBLE}  %%optionnel : à décommenter et à renseigenr si vous voulez changer le grade
+% \Specialite{Automatique - Productique}
+% \Arrete{7 Ao\^ut 2006}
+% \Auteur{Jonatan Uziel ALVAREZ MU\~{N}OZ}
+% \Directeur{Nicolas MARCHAND,}
+% \CoDirecteur{Jos\'{e} Fermi GUERRERO CASTELLANOS}
+% \Coencadrent{Sylvain DURAND}%%optionnel : à décommenter et à renseigenr si présence d'un Co-directeur de thèse
+% \Laboratoire{du GIPSA-Lab de Grenoble}
+% \EcoleDoctorale{l'\'{e}cole doctorale EEATS}
+% \Titre{Modelling and control of VTOL vehicles with rigid manipulators}
+%\Soustitre{}      %%optionnel : à décommenter et à renseigenr si présence d'un sous-titre de thèse
+% \Depot{}
+
+
+% Commande pour création de nouvelles catégories dans le jury:
+
+%\UGTNewJuryCategory{...NomDeLaCategorie...}{...Definition...}
+
+% Exemple \UGTNewJuryCategory{UGTFamille}{Membre de la famille} que nous ajoutons dans la commande \Jury ci-dessous sous la forme \UGTFamille{Jean Rousseau}{(...titre_et_affiliation...s'il_y_en_a...)}
+
+
+% \Jury{
+% %\UGTPresident{...Civilité, Prénom-et-Nom...}{...titre-et-affiliation...}
+% %\UGTPresidente{...Civilité, Prénom-et-Nom...}{...titre-et-affiliation...}
+%
+% \UGTRapporteur{Antonio FRANCHI}{Charg\'{e} de recherche, LAAS-CNRS, Toulouse}      %% 1er rapporteur
+% \UGTRapporteur{Arturo ZAVALA RIOS}{Charg\'{e} de recherche, Instituto Potosino de Investigación Científica y Tecnológica, A.C., S.L.P, Mexique}      %% second rapporteur
+%
+% \UGTExaminateur{St\'{e}phane VIOLLET}{Directeur de recherche, ISM-CNRS, Marseille}     %% 1er examinateur
+% \UGTExaminateur{Edouard LAROCHE}{Professeur, ICube - AVR, Strasbourg}     %% second examinateur
+% %\UGTExaminatrice{Ahmad HABLY}{...titre-et-affiliation...}    %% 3ème examinateur
+% \UGTExaminateur{Ahmad HABLY}{Ma\^{i}tre de conf\'{e}rences, GIPSA-Lab-CNRS, Grenoble}
+% %\UGTInvitee{...Civilité, Prénom-et-Nom...}{...titre-et-affiliation...}
+%
+% \UGTDirecteur{Nicolas MARCHAND}{Directeur de Recherche, GIPSA-Lab-CNRS, Grenoble}       %% Directeur de thèse
+% \UGTCoDirecteur{Jos\'{e} Fermi GUERRERO CASTELLANOS}{Professeur, BUAP, Puebla, Mexique}%% Co-Directeur de thèse s'il y en a
+% \UGTCoDirecteur{Sylvain DURAND}{Ma\^{i}tre de conf\'{e}rences, INSA \& ICube, Strasbourg}%% Co-Directeur de thèse s'il y en a
+%
+% }
+
+% \MakeUGthesePDG    %% très important pour générer la couvérture de thèse
+%
+%
+%
+% \maketitle
+
+
+\clearemptydoublepage
+\chapter*{Aknowledgments}
+\thispagestyle{empty}
+
+\clearemptydoublepage
+\frontmatter
+
+
+%\clearemptydoublepage
+%\shorttableofcontents{Table of Contents}{0}
+%\newpage
+\clearemptydoublepage
+\tableofcontents
+\clearemptydoublepage
+\listoffigures
+
+\clearemptydoublepage
+\mainmatter % Ne pas oublier, avec \frontmatter et \backmatter
+
+%\chapter*{Introduction}
+ \chaptermark{Introduction}
+% \addcontentsline{toc}{chapter}{Introduction}\markboth{INTRODUCTION}{}
+%\input{Chapter01/introduction.tex}
+
+\clearemptydoublepage
+\input{Chapter02/chapter02.tex}
+%
+\clearemptydoublepage
+% % \chapter{State of the art of aerial manipulation}
+\input{Chapter03/chapter03.tex}
+%
+%
+ \clearemptydoublepage
+% \chapter{Modeling of a quadcopter carrying a manipulator arm}
+ \input{Chapter04/chapter04.tex}
+%
+%
+ \clearemptydoublepage
+% \chapter{Nonlinear control of a quadcopter carrying a manipulator arm}
+          \input{Chapter05/chapter05}
+\clearemptydoublepage
+
+
+% \chapter{Conclusions and Future work}
+        \input{Chapter06/conclusions.tex}
+
+
+
+\clearemptydoublepage
+
+% ********************************** Appendices ********************************
+%
+
+\appendix%\begin{appendices}
+%\addcontentsline{toc}{chapter}{Appendix}%{\protect\setcounter{tocdepth}{0}}
+\renewcommand\chaptername{Appendix}
+%   \chapter{Experimental platforms}
+%   \label{ap:plat}
+%           \input{platforms}
+
+ \include{Appendix1/appendix1}
+ \include{Appendix2/appendix2}
+ \include{Appendix3/appendix3}
+ \include{Appendix4/platforms}
+
+
+%\end{appendices}
+
+\backmatter
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{plainnat}               % Set any options you want
+\bibliography{biblio}             % bib file to produce the bibliography
+                                                     % with bibtex (preferred)
+
+%\bibliography{biblio}         % Build the bibliography
+
+
+%\nocite{*} % Pour citer la totalité des références contenues dans le fichier bibtex.
+%\printbibliography[heading=primary,keyword=primary]
+%\newpage
+%\nocite{*}
+%\printbibliography[heading=secondary,keyword=secondary]
+
+
+\end{document}

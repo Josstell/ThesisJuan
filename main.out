@@ -1,0 +1,44 @@
+\BOOKMARK [0][-]{chapter.1}{Preliminaries and state of the art}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Computer Vision}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Projective geometry}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Model geometry}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.3}{Camera calibration}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.4}{Formation of the image in projective geometry}{section.1.1}% 6
+\BOOKMARK [1][-]{section.1.2}{UAVs: Mini-helicopter of four rotors}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.2.1}{Vertical Take Off and Landing \(VTOL\) vehicles}{section.1.2}% 8
+\BOOKMARK [2][-]{subsection.1.2.2}{Rotorcraft}{section.1.2}% 9
+\BOOKMARK [2][-]{subsection.1.2.3}{Powered lift}{section.1.2}% 10
+\BOOKMARK [1][-]{section.1.3}{Multi-rotors: state of the art}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.3.1}{Characteristics and operation of the mini-UAV}{section.1.3}% 12
+\BOOKMARK [1][-]{section.1.4}{Position representation}{chapter.1}% 13
+\BOOKMARK [1][-]{section.1.5}{Rigid body attitude representation}{chapter.1}% 14
+\BOOKMARK [1][-]{section.1.6}{Conclusions}{chapter.1}% 15
+\BOOKMARK [0][-]{chapter.2}{Pose estimation using a single camera}{}% 16
+\BOOKMARK [1][-]{section.2.1}{Pose estimation algorithm}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.1.1}{Vanishing point algorithm}{section.2.1}% 18
+\BOOKMARK [2][-]{subsection.2.1.2}{Dominant lines detection}{section.2.1}% 19
+\BOOKMARK [2][-]{subsection.2.1.3}{Lines classification}{section.2.1}% 20
+\BOOKMARK [2][-]{subsection.2.1.4}{Rotation matrix estimation}{section.2.1}% 21
+\BOOKMARK [2][-]{subsection.2.1.5}{Principal lines estimation}{section.2.1}% 22
+\BOOKMARK [2][-]{subsection.2.1.6}{Pose camera estimation}{section.2.1}% 23
+\BOOKMARK [1][-]{section.2.2}{Numerical validation}{chapter.2}% 24
+\BOOKMARK [1][-]{section.2.3}{Conclusions}{chapter.2}% 25
+\BOOKMARK [0][-]{chapter.3}{Position control law and velocity estimation of an UAV}{}% 26
+\BOOKMARK [1][-]{section.3.1}{Position control law}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.2}{Velocity estimation}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.2.1}{Observer}{section.3.2}% 29
+\BOOKMARK [2][-]{subsection.3.2.2}{Kalman filter}{section.3.2}% 30
+\BOOKMARK [1][-]{section.3.3}{Conclusions}{chapter.3}% 31
+\BOOKMARK [0][-]{chapter.4}{Platform and experimental validation}{}% 32
+\BOOKMARK [1][-]{section.4.1}{Moca Room and ground station}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.1.1}{Moca Room}{section.4.1}% 34
+\BOOKMARK [2][-]{subsection.4.1.2}{Ground station}{section.4.1}% 35
+\BOOKMARK [1][-]{section.4.2}{Experimental plattforms}{chapter.4}% 36
+\BOOKMARK [1][-]{section.4.3}{Experimental results}{chapter.4}% 37
+\BOOKMARK [1][-]{section.4.4}{Conclusions}{chapter.4}% 38
+\BOOKMARK [0][-]{chapter.5}{Conclusions and Future work}{}% 39
+\BOOKMARK [1][-]{section.5.1}{Conclusions}{chapter.5}% 40
+\BOOKMARK [1][-]{section.5.2}{Future Work}{chapter.5}% 41
+\BOOKMARK [0][-]{appendix.A}{Vanishng point}{}% 42
+\BOOKMARK [0][-]{appendix.B}{RANSAC}{}% 43
+\BOOKMARK [0][-]{appendix.C}{Linear least squares regression}{}% 44

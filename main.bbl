@@ -1,0 +1,171 @@
+\begin{thebibliography}{25}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Alaimo et~al.(2013)Alaimo, Artale, Milazzo, Ricciardello, and
+  Trefiletti]{Alaimo:2013}
+A.~Alaimo, V.~Artale, C.~Milazzo, A.~Ricciardello, and L.~Trefiletti.
+\newblock Mathematical modeling and control of a hexacopter.
+\newblock In \emph{2013 International Conference on Unmanned Aircraft Systems
+  (ICUAS)}, pages 1043--1050, May 2013.
+
+\bibitem[Arellano-Muro et~al.(2013)Arellano-Muro, Luque-Vega, Castillo-Toledo,
+  and Loukianov]{Arellano:2013}
+C.~A. Arellano-Muro, L.~F. Luque-Vega, B.~Castillo-Toledo, and A.~G. Loukianov.
+\newblock Backstepping control with sliding mode estimation for a hexacopter.
+\newblock In \emph{2013 10th International Conference on Electrical
+  Engineering, Computing Science and Automatic Control (CCE)}, pages 31--36,
+  Sept 2013.
+
+\bibitem[Bora and Erdinc(2007)]{erginer:2007}
+E.~Bora and A.~Erdinc.
+\newblock Modeling and pd control of a quadrotor vtol vehicle.
+\newblock In \emph{2007 IEEE Intelligent Vehicles Symposium}, pages 894--899.
+  IEEE, 2007.
+
+\bibitem[Bouabdallah and Sierwart(2005)]{Bouabdallah:2005}
+S.~Bouabdallah and R.~Sierwart.
+\newblock Backstepping and sliding-mode techniques applied to an indoor micro
+  quadrotor.
+\newblock In \emph{IEEE International Conference on Intelligent Robot and
+  Automation}, 2005.
+
+\bibitem[Boulanger et~al.(2006)Boulanger, Bouatouch, and
+  Pattanaik]{boulanger:inria-00461526}
+Kevin Boulanger, Kadi Bouatouch, and Sumant Pattanaik.
+\newblock {ATIP: A Tool for 3D Navigation inside a Single Image with Automatic
+  Camera Calibration}.
+\newblock In EUROGRAPHICS, editor, \emph{{EG UK conference}}, Middlesbrough,
+  United Kingdom, June 2006. {EUROGRAPHICS}, {WILEY}.
+\newblock URL \url{https://hal.inria.fr/inria-00461526}.
+
+\bibitem[Courbon et~al.(2009)Courbon, Mezouar, Guenard, and
+  Martinet]{courbon:2009}
+J.~Courbon, Y.~Mezouar, N.~Guenard, and P.~Martinet.
+\newblock Visual navigation of a quadrotor aerial vehicle.
+\newblock In \emph{Intelligent Robots and Systems, 2009. IROS 2009. IEEE/RSJ
+  International Conference on}, pages 5315--5320. IEEE, 2009.
+
+\bibitem[Cuneyt~Akinlar(2011)]{Akinlar2011}
+Cihan~Topal Cuneyt~Akinlar.
+\newblock Edlines: Real-time line segment detection by edge drawing (ed).
+\newblock pages 2837--2840, 2011.
+
+\bibitem[DJI(2017)]{website:dji}
+DJI.
+\newblock The future of possible, February 2017.
+\newblock URL \url{http://www.dji.com}.
+
+\bibitem[Elloumi et~al.(2014)Elloumi, Treuillet, and Leconge]{Elloumi2014}
+Wael Elloumi, Sylvie Treuillet, and R{\'e}my Leconge.
+\newblock Real-time camera orientation estimation based on vanishing point
+  tracking under manhattan world assumption.
+\newblock \emph{Journal of Real-Time Image Processing}, pages 1--16, 2014.
+\newblock ISSN 1861-8219.
+\newblock \doi{10.1007/s11554-014-0419-9}.
+\newblock URL \url{http://dx.doi.org/10.1007/s11554-014-0419-9}.
+
+\bibitem[Fogelberg(2013)]{Fogelberg:2008}
+J.~Fogelberg.
+\newblock \emph{Navigation and Autonomous Control of a Hexacopter in Indoor
+  Environments}.
+\newblock PhD thesis, Sweden Lund University, 2013.
+
+\bibitem[Fossen(1994)]{Fossen:1994}
+T.~I. Fossen.
+\newblock \emph{Guidance and Control of Ocean Vehicles}.
+\newblock John Wiley and Sons, New York, 1994.
+
+\bibitem[Guerrero-Castellanos(2008)]{phdguerrero:2008}
+J.~F. Guerrero-Castellanos.
+\newblock \emph{Estimation de l\textquotesingle attitude et commande en
+  attitude d\textquotesingle un corps rigide : application à un mini
+  h\'{e}licoptère à quatre rotors}.
+\newblock PhD thesis, Universit\'{e} Joseph Fourier-Grenoble I, January 2008.
+
+\bibitem[Guerrero-Castellanos et~al.(2011)Guerrero-Castellanos, Marchand,
+  Hably, Lesecq, and Delamare]{Guerrero:2011}
+J.~F. Guerrero-Castellanos, N.~Marchand, A.~Hably, S.~Lesecq, and J.~Delamare.
+\newblock Bounded attitude control of rigid bodies: Real-time experimentation
+  to a quadrotor mini-helicopter.
+\newblock \emph{Control Engineering Practice}, 19:\penalty0 790--797, 2011.
+
+\bibitem[Hoffmann et~al.(2007)Hoffmann, Huang, Waslander, and
+  Tomlin]{hoffmann:2007}
+G.~M. Hoffmann, H.~Huang, S.~L. Waslander, and C.~J. Tomlin.
+\newblock Quadrotor helicopter flight dynamics and control: Theory and
+  experiment.
+\newblock In \emph{Proc. of the AIAA Guidance, Navigation, and Control
+  Conference}, volume~2, page~4, 2007.
+
+\bibitem[Hough("2016")]{HoughMAtlab}
+Hough.
+\newblock Matlab, "2016".
+\newblock URL \url{https://fr.mathworks.com/help/images/ref/hough.html}.
+
+\bibitem[Jun and Yuntang(2011)]{li:2011}
+L.~Jun and L.~Yuntang.
+\newblock Dynamic analysis and pid control for a quadrotor.
+\newblock In \emph{2011 IEEE International Conference on Mechatronics and
+  Automation}, pages 573--578. IEEE, 2011.
+
+\bibitem[Lee et~al.(2009)Lee, Hebert, and Kanade]{Lee2009}
+D.~C. Lee, M.~Hebert, and T.~Kanade.
+\newblock Geometric reasoning for single image structure recovery.
+\newblock In \emph{Computer Vision and Pattern Recognition, 2009. CVPR 2009.
+  IEEE Conference on}, pages 2136--2143, June 2009.
+\newblock \doi{10.1109/CVPR.2009.5206872}.
+
+\bibitem[Li et~al.(2013)Li, Zhang, and Gordon]{li:2013}
+T.~Li, Y.~Zhang, and B.~W. Gordon.
+\newblock Passive and active nonlinear fault-tolerant control of a quadrotor
+  unmanned aerial vehicle based on the sliding mode control technique.
+\newblock \emph{Proceedings of the Institution of Mechanical Engineers, Part I:
+  Journal of Systems and Control Engineering}, 227\penalty0 (1):\penalty0
+  12--23, 2013.
+
+\bibitem[Madani and Benallegue(2006)]{Abdelaziz:2006}
+T.~Madani and A.~Benallegue.
+\newblock Control of a quadrotor mini-helicopter via full state backstepping
+  technique.
+\newblock In \emph{45th IEEE Conference on Decision and Control}, pages
+  1515--1520, 2006.
+
+\bibitem[Nelson(1998)]{Nelson:1998}
+R.~C. Nelson.
+\newblock \emph{Flight Stability and Automatic Control}, volume second edition.
+\newblock McGraw-Hill, Boston, 1998.
+
+\bibitem[Sebesta and Baillieul(2012)]{sebesta:2012}
+K.~Sebesta and J.~Baillieul.
+\newblock Animal-inspired agile flight using optical flow sensing.
+\newblock In \emph{Decision and Control (CDC), 2012 IEEE 51st Annual Conference
+  on}, pages 3727--3734. IEEE, 2012.
+
+\bibitem[Sharifi et~al.(2010)Sharifi, Mirzaei, Gordon, and Zhang]{sharifi:2010}
+F.~Sharifi, M.~Mirzaei, B.~W Gordon, and Y.~Zhang.
+\newblock Fault tolerant control of a quadrotor uav using sliding mode control.
+\newblock In \emph{Control and Fault-Tolerant Systems (SysTol), 2010 Conference
+  on}, pages 239--244. IEEE, 2010.
+
+\bibitem[Spong et~al.(2004)Spong, Hutchinson, and M.]{Spong:2004}
+M.~W. Spong, S.~Hutchinson, and Vidyasagar M.
+\newblock \emph{Robot Dynamics and Control}.
+\newblock JOHN WILEY and SONS, INC., 2004.
+
+\bibitem[Yali et~al.(2010)Yali, Changhong, and Haiwei]{Wu:2010}
+Y.~Yali, J.~Changhong, and W.~Haiwei.
+\newblock Backstepping control of each channel for a quadrotor aerial robot.
+\newblock In \emph{2010 International Conference on Computer, Mechatronics,
+  Control and Electronic Engineering}, volume~3, Aug 2010.
+
+\bibitem[Zheng et~al.(2014)Zheng, Xiong, and Luo]{Zheng:2014}
+E.~H. Zheng, J.~J. Xiong, and J.~L. Luo.
+\newblock Second order sliding mode control for a quadrotor uav.
+\newblock \emph{ISA Transactions}, 53:\penalty0 1350 -- 1356, 2014.
+\newblock ISSN 0019-0578.
+
+\end{thebibliography}

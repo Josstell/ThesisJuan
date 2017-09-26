@@ -1,0 +1,634 @@
+<<<<<<< current
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** Third Chapter **********************************
+%*******************************************************************************
+\chapter{Pose estimation using a single camera}%Lateral and height
+
+% **************************** Define Graphics   Path **************************
+\ifpdf
+    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+\else
+    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+\fi
+
+
+UAV autonomous navigation into corridors or tunnels is a hard task due mainly to the localization problem. GPS measurements are usually dropped noised or unavailable. Cameras become a popular sensors for pose estimation even if sometimes is hard to compute on-board the algorithm. This chapter is centered on the estimation of the relative position of the vehicle through a single image in real-time execution. This information is useful since it serves to make an indoor navigation (in a corridor). The algorithm designed is intended to use the minimum of resources of the computer. Although this first stage focuses on using tools such as matlab, the algorithms can be easily implemented in an embedded system. So the program can be resume as follow: firstly the virtual image is obtained. Then the edges of the image are extracted.  The rotation %This extracted information are all the lines obtained from the edges of doors, windows, walls, corners, etc.
+matrix of the camera is estimated using infinite vanishing points and finite vanishing points. A new sub-classification of lines is made from the finite vanishing point. This subset is done in four quadrants. Using the finite vanishing point and the information of each quadrant, we can obtain the principal line from each corner. The collinearity property is used with pairs of major lines. If there is a collinearity between each pair of lines the system is centered. Otherwise, the result is a percentage of displacement in the \textit{y}-axis, \textit{z}-axis.  The scale is a percentage of displacement where the center of the corridor indicates a zero percentage of displacement. A numerical validation is made in order to verify this algorithm.
+
+\section{Pose estimation algorithm}
+
+ The proposed vision algorithm takes into account the perspective projection, the vanish point identification and the collinearities of the principal lines in the image to estimate the pose of an aerial vehicle. 0.2cm Ideas from \cite{Akinlar2011, boulanger:inria-00461526} and \cite{Lee2009} have inspired our algorithm.  The general scheme of the estimation pose algorithm can be seen in Figure \ref{fig:1_algo}. As can be observed in this figure, once the image is acquired a line
+detector algorithm is applied. For making a subset of vertical, horizontal and diagonal lines a histogram is then used. After that, the rotation matrix is acquired and the line classification algorithm is again applied for extracting principal lines in the image. This information is used with the collinearity approach for estimating the pose of the camera. Therefore it is relatively easy compute the \textit{y} and \textit{z}-axis in the image plane.
+
+Figure \ref{fig:VisionAlgoritm} shows the general procedure, and  this  depics too the vanishing point evolution. For obtaining the pose estimation it is necessary to know the camera model, next subsections will introduce this concept and each block in the general scheme algorithm.
+
+\begin{figure*}[h!]
+\centering
+\includegraphics[width=0.85\textwidth]{Chapter03/Images/Algoritme_m.png}
+\caption{These images introduce the applied methodology. The scene is a corridor and an image is taken from the video to extract a set of lines that could describe geometrically the environment and the rotation matrix. Four new subsets of lines are made taking into account the vanishing point (quadrant 1, 2, 3 and 4). The information of each quadrant is used to obtain the principal lines (LQ1, LQ2, LQ3, LQ4). }
+\label{fig:VisionAlgoritm}
+\end{figure*}
+
+
+\subsection{Vanishing point algorithm}
+Perspective projection of parallel lines in world space creates vanishing lines in image space that
+intersect in a point called vanishing point. If the parallel lines are parallel to the image plane,
+the vanishing lines are also parallel to this plane and the vanishing point is at an infinite
+distance from the image center, hence is called infinite vanishing point. Otherwise, it is a finite
+vanishing point. For our case the camera calibration is based on the following assumption: the main vanishing lines in the input image correspond to three orthogonal directions in world space as can be seen in Figure \ref{fig:VisionAlgoritm}.
+
+\subsection{Dominant lines detection}
+In man-made indoor environments, it is possible to extract line segments, texture, colors and so on.
+In this work,  the linear time line segment detector called EDlines \cite{Akinlar2011} is used giving accurate results and with high time process (all the segments for an image $240 \times3 20$ are computed in 3 $ms$). This algorithm no requires parameter tuning and run ups faster than others methods as the Hough transform \cite{HoughMAtlab}.
+
+\subsection{Lines classification}
+
+RANSAC (Random Sample Consensus) has become  a simple and powerful method to %various authors have been developed and introduced RANSAC as
+provide a partition of parallel straight lines into clusters by
+pruning outliers. \color{blue} The algorithm begins selecting randomly  two lines for generating a VP hypothesis.  These lines  are grouped together in order to optimize the estimated VP and for obtaining a dominant VP.
+When a dominant VP is obtained, the process finishes. Nevertheless, several finite vanishing points can be
+extracted from the environment with this algorithm. \color{black} \vskip 0.2cm
+
+
+In the context of indoor navigation, the main orthogonal
+directions in environments consist generally in a vertical
+one (often associated with an infinite VP) and two horizontal
+ones (associated with finite or infinite VP). In this work, the heuristic strategy is taken  to extract a
+limited number of reliable VP while enforcing the
+orthogonality constraint, in conjunction with RANSAC.  \vskip 0.2cm
+
+For a robust selection of VPs, an histogram is made in order to classify
+all the set of lines in a subset of vertical lines  $L_v$, a subset of horizontal lines $L_h$ and a subset
+of diagonal lines $L_d$. For clustering lines by RANSAC, the consensus score is quite different
+depending on each subset and is computing with (\ref{RansacVP1}). Unlike the finite VP whose coordinates may be determined in
+the image plan (lines $L_d$), the infinite VPs are generally represented with a
+direction (lines $L_v$, $L_h$). For finite VP, the consensus score is based on a
+distance between the candidate straight line and the
+intersecting point and represented as (\ref{RansacVP2}). For infinite VP, it is obtained with (\ref{RansacIVP}) using the angular
+distance between the direction of the candidate straight line
+and the direction representing the infinite VP,  more details see \cite{Elloumi2014}.
+
+\begin{eqnarray}
+	score &=&  \sum_{i=0}^{n} \Upsilon(v,l_i)  \label{RansacVP1} \\
+  	\Upsilon(v,l_i)  &=&  \left \{\begin{array}{ll}
+ 	                   1 & d(v,l_i) < \delta\\
+ 	                   0 &  \text{otherwise}
+ 	                  \end{array} \right.       \label{RansacVP2} \\
+	 \Upsilon(v,l_i) &=&  \left \{\begin{array}{ll}
+ 	                   1 & Min(\widehat{(\overrightarrow{v},\overrightarrow{l_i})},\widehat{(\overrightarrow{l_i},\overrightarrow{v})}) < \delta\\
+ 	                   0 & \text{otherwise}
+ 	                  \end{array} \right.   \label{RansacIVP}
+ \end{eqnarray}
+where $n$ is the number of dominant lines and $d(v, l_i)$ denotes the
+Euclidian distance from the finite VP candidate $v$ to the line $l_i$.
+The lines whose distance is below a fixed threshold $\delta$ are
+considered as participants. $(\overrightarrow{v},\overrightarrow{l_i})$ describes the angle between the infinite VP direction
+from the image center and the line $l_i$ to test in image space. \color{black}
+
+\subsection{Rotation matrix estimation}
+
+It is known that when using the VPs intrinsic and extrinsic camera parameters can be estimated. We consider that the intrinsic parameters are known thus we will focus on compute the others ones, in particularly the Rotation matrix.
+The main point $p$ of the camera is set to the center of the image plane. The rotation matrix
+$(\vec{u},\vec{v},\vec{w})$ transforms points from real world to the image plane. Its columns are the vectors of the world coordinates frame expressed in the camera space. The directions of the three vanishing points from the optical center of the camera are assumed to be orthogonal. Thus without loss of generality, the following relations hold for the final calibrated.
+
+\begin{subequations}
+\begin{align}
+	\label{VectorOrto}
+	f>0 \\
+	\vec{u} \cdot \vec{v}= \vec{v}\cdot \vec{w}=\vec{w}\cdot \vec{u}=0\\
+  	\abs{\vec{u}}=\abs{\vec{v}}=\abs{\vec{w}}
+\end{align}
+\end{subequations}
+
+The obtained structured lines  from the corridor image provide enough information to estimate the camera rotation matrix.
+Normally, it is supposed that the camera has a vertical position, and  as the corridor is plenty of vertical and horizontal lines, then it is possible to find a finite vanishing point and two infinite vanishing points.
+
+
+\subsubsection*{A finite vanishing point, two infinite vanishing points}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{Chapter03/Images/twoInfiniteVPOneFVPG.pdf}
+\caption{Camera calibration with one finite and two infinite vanishing points. $(x_c,y_c,z_c)$ is the camera coordinate frame, $(\vec{u},\vec{v},\vec{w})$ the world coordinate frame, $VP$ the finite vanishing point, $\vec{I_1}$ and $\vec{I_2}$ the infinite vanishing point directions. $P$ is the main point.}
+\label{fig:3_unpunto}
+\end{figure}
+
+This case occurs when two axes of the world frame are parallel to the image plane.  Fig \ref{fig:3_unpunto}
+introduces the terms involved for the camera calibration
+using one finite vanishing point $\overrightarrow{OVP} = (vp_{x}, vp_{y},-f )^T$ and
+two infinite vanishing points with directions $\vec{I_1} = (I_{1_x}, I_{1_y},0)^T$
+and $\vec{I_2} = (I_{2_x}, I_{2_y},0)^T$. \vskip 0.2cm
+
+
+The vector $\vec{w}'$ defines a non-normalized form of  $\vec{w}$,
+and is computed from the finite vanishing point as
+\begin{equation}
+	\label{oneVanish}
+	\vec{w}'= (w_{x}',w_{y}',w_{z}')=\overrightarrow{OVP}=(vp_{x}, vp_{y},-f )
+ \end{equation}
+
+The coordinate axis $\vec{u}$, as indicated in Figure \ref{fig:3_unpuntoH}, lies
+on the plane defined by the points $O$, $P$ and the direction
+$\vec{I_1} = (I_{1_x}, I_{1_y},0)^T$ . Then $\vec{u}'$, the non-normalized version of
+$\vec{u}$, can be expressed as $\vec{u}' = (I_{1_x}, I_{1_y},u_{z}')$. The goal is that
+$\vec{u}$ and $\vec{w}$ belong into an orthogonal coordinate frame, then
+\begin{equation}
+	%\label{oneVanish}
+	\vec{u}' \cdot  \vec{w}'= I_{1_x}w_{x}'+ I_{1_y}w_{y}'+u_{z}'w_{z}' =0
+ \end{equation}
+therefore
+ \begin{equation}
+	\label{PlanoU}
+	u_{z}'=\frac{I_{1_x}w_{x}'+ I_{1_y}w_{y}'}{f}
+\end{equation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{Chapter03/Images/twoInfiniteVPOneFVPH.pdf}
+\caption{ $\vec{u}$ estimation from the infinite vanishing points.}
+\label{fig:3_unpuntoH}
+\end{figure}
+
+Similar procedures can be used for $\vec{v}' = (I_{2_x}, I_{2_y},v_{z}')$ (see Figure \ref{fig:3_unpuntoV}), thus
+
+\begin{equation}
+	\label{PlanoV}
+	v_{z}'=\frac{I_{2_x}w_{x}'+ I_{2_y}w_{y}'}{f}
+\end{equation}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{Chapter03/Images/twoInfiniteVPOneFVPV.pdf}
+\caption{$\vec{v}$ estimation from  the infinite vanishing points.}
+\label{fig:3_unpuntoV}
+\end{figure}
+
+Typically the vertical lines are plenty and more precise in
+many images, so it retains $\vec{v}'$ and $\vec{w}'$ and compute $\vec{u}'$ using a
+cross product, $\vec{u}'= \vec{v}'\times \vec{w}'$. The rotation matrix of the camera $R= (\vec{u},\vec{v},\vec{w})$ from
+ Eq. (\ref{CameraMatrix}) which meets the conditions from Eq. (\ref{VectorOrto}) is
+obtained by normalizing $\vec{u}'$, $\vec{v}'$ and $\vec{w}'$.
+
+
+\subsection{Principal lines estimation}
+
+color{blue}
+
+Once the camera rotation matrix obtained, fusing this information with $ L_v $,  $ L_h $ and  $ L_d $ thus, the principal lines of the corridor (corners of the the corridor) could be estimated. The algorithm results in  four new subsets (quadrants 1,2,3,4) relatives with to the vanishing point and the rotation matrix. Therefore, the information in each quadrant
+is useful to find the main line of each subset. Each subset of lines contains the beginning and end point of each line as well as its inclination and its length.  \vskip 0.2cm
+
+\color{magenta}
+
+The principal lines which are in the border of the right wall-ceiling $L_{Q_1}$, right wall-floor $L_{Q_2}$,
+left wall-ceiling $L_{Q_3}$ and left wall-floor $L_{Q_4}$ are depicted in Fig \ref{fig:VisionAlgoritm}.  \vskip 0.2cm
+
+% \subsubsection{Generalized least squares fitting}
+
+%{\footnotesize
+%      \begin{tabular}{p{0.6\textwidth} p{0.4\textwidth}}
+	%  \begin{itemize}
+%     \item Let  $X_1=(x_1,x_2,...,x_n)^T$ and $Y_1=(y_1,y_2,...,y_n)^T$. Define a new $2\times n$ matrix $X=(X_1, Y_1)^T$.
+%    {\tiny
+
+   \begin{equation*}
+ C_m\equiv \begin{bmatrix}%\dfrac{1}{2}XX^T=
+     \omega_n \sum x_n^2   &  \omega_n \sum x_n y_n \\
+     \omega_n \sum x_n y_n &  \omega_n \sum y_n^2
+    \end{bmatrix}
+\end{equation*}
+%}
+
+$(x_n,y_n)$ are the initial and final points from each line, $C_m$ represents the covariance matrix, $m$ represents the frames and
+\begin{equation*}
+ \omega_n=e^{\frac{-0.5 \theta^2}{\sigma^2}}
+\end{equation*}
+\begin{equation*}
+ \theta=\arctan \frac{x_n a_{m-1}+y_n b_{m-1}}{x_n a_{m-1}-y_n b_{m-1}}
+\end{equation*}
+
+Where $\omega_n$ is the weight that supply the response variance to a constant value, $a_{m-1}, b_{m-1}$ represents initial line hypothesis and the .
+
+
+\begin{equation*}
+y=LQ_k=-\frac{b_m}{a_m} x
+\end{equation*}
+where the vector proper  $\alpha=[a_m, b_m]^T$ extracted from $C_m$ represents the principal line of each quadrant with $k=1,2,3,4$.
+
+\color{red}
+Sigo sin entender esta ultima parte que me enviaste
+podrias explicarlo en espanol?
+\color{black}
+
+\subsection{Pose camera estimation}
+
+
+\color{blue}
+
+Position camera estimation is obtained using the previous results and the relation with the borders of the corridor. Hence, when the camera is in the center of the corridor, there is a collinearity
+between the lines $L_{Q_1},L_{Q_3}$ and $L_{Q_2},L_{Q_4}$ that can be expressed as
+\begin{eqnarray}
+		   CP_{1,3} &=& L_{Q_1}\wedge L_{Q_3} \label{crossLines13} \\
+		   CP_{2,4} &= & L_{Q_2}\wedge L_{Q_4} \label{crossLines24}
+\end{eqnarray}
+
+The third component of $CP_{1,3}$ and $CP_{2,4}$ supplies the information to obtain the relative camera position and it is given as
+\begin{eqnarray}
+		y_r=CP_{1,3}-CP_{2,4} \label{relaitve_x} \\
+z_r=CP_{1,3}+CP_{2,4} \label{realitive_z}
+\end{eqnarray}
+where $y_r$ and $z_r$ are the relative position with respect to the center of the corridor. \\
+
+\color{black}
+
+\color{red}
+Las figuras que pusiste y como las pusiste no se ven, tienden a confundir y hace mas complicado el asunto para entender, te voy a poner un bosquejo de como quedaria mejor..
+para esto necesito una secuencia de estas figuras separadas (cada figura separada..)
+\color{blue}
+
+\section{Numerical validation}
+%
+%
+% The previous algorithm for pose estimation was firstly tested off-line. For corroborating equations (\ref{crossLines13}) and (\ref{crossLines24}) a sequence of images where taken with specified  movements as shown in Figures \ref{camera up and down} and \ref{camera right and left}.
+%
+% \begin{figure} [h!]
+% \centering
+% \includegraphics[scale=0.5]{Chapter03/Images/CentreFrames_m.png}
+% \caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move up, 3) returns to the middle, 4) move down and 5) returns to the middle. }
+% \label{camera up and down}
+% \end{figure}
+%
+%
+% \begin{figure} [h!]
+% \centering
+% \includegraphics[scale=0.5]{Chapter03/Images/Lateral_m.png}
+% \caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move rigth, 3) returns to the middle, 4) move left and 5) returns to the middle. }
+% \label{camera right and left}
+% \end{figure}
+
+% The experiment was to place the camera in the middle of the corridor and moves it firstly up and down (Figure \ref{camera up and down}) and after right and left (Figure \ref{camera right and left}). These movements can be represented via principal lines in the image and observed graphically in Figures  \ref{fig:CentreFrames} and \ref{fig:lateralFRames}, where the cross product between $L_{Q_i}$ are represented, see (\ref{crossLines13}) and (\ref{crossLines24}). On one hand, notice for example from Figure \ref{fig:CentreFrames}  that both cross products have the same behavior and when if the camera is moved up the lines representing $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ increase and when the camera is moved down they decrease, representing then the good camera's behavior. On the other hand, when the camera is moved right and left, then the cross product between $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ are different (see Figure  \ref{fig:lateralFRames}), nevertheless this information gives necessary data to estimate the $y$ position, as can be seen in Figure  \ref{fig:XYlateral}. Observe in this figure that when the camera is moved right the $y$ estimation is negative and if it is moved left, then a $y$ positive response is obtained. In addition note that $z$ estimation remains quasi-constant. Similarly for Figure \ref{fig:XYcentre} where with the up and down camera's movements the $z$ state is estimated, observe also that $y$ estimation is also quasi-constant.
+%
+%
+%
+% \begin{figure}[h!]
+%         \centering
+%     \subfigure[Frames position and cross product, the camera is moving up and down ]
+%     {
+%       \input{Imagenes/centreCross.tex}
+%       \label{fig:CentreFrames}
+%     }
+%     \subfigure[Relative position]
+%     {
+%       \input{Imagenes/centreXY.tex}
+%       \label{fig:XYcentre}
+%      }
+%           \caption{(a) Cross product between principal lines of a corridor, (b)
+%           relative position between the cross product and the principal lines }
+%     \label{fig:centrePosition}
+%   \end{figure}
+%
+%
+%
+%   \begin{figure}[!h]
+%   \centering
+%     \subfigure[Frames position and cross product, the camera is moving from right to left]
+%     {
+%       \input{Imagenes/LateralCross.tex}
+%       \label{fig:lateralFRames}
+%     }
+%     \subfigure[Relative position]
+%     {
+%       \input{Imagenes/LateralXY.tex}
+%       \label{fig:XYlateral}
+%      }
+%           \caption{(a) Cross product between principal lines of a corridor, (b)
+%           relative position between the cross product and the principal lines }
+%     \label{fig:LateralPosition}
+%   \end{figure}
+%
+%   \color{black}
+%
+
+\section{Conclusions}
+
+
+
+% And now I begin my third chapter here \dots
+%
+% And now to cite some more people~\citet{Rea85,Ancey1996}
+%
+% \subsection{First subsection in the first section}
+% \dots and some more
+%
+% \subsection{Second subsection in the first section}
+% \dots and some more \dots
+%
+% \subsubsection{First subsub section in the second subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it \dots
+%
+% \subsection{Third subsection in the first section}
+% \dots and some more \dots
+%
+% \subsubsection{First subsub section in the third subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it and some more and some more and
+% some more and some more and some more and some more and some more \dots
+%
+% \subsubsection{Second subsub section in the third subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it \dots
+%
+% \section{Second section of the third chapter}
+% and here I write more \dots
+%
+% \section{The layout of formal tables}
+% This section has been modified from ``Publication quality tables in \LaTeX*''
+%  by Simon Fear.
+%
+% The layout of a table has been established over centuries of experience and
+% should only be altered in extraordinary circumstances.
+%
+% When formatting a table, remember two simple guidelines at all times:
+%
+% \begin{enumerate}
+%   \item Never, ever use vertical rules (lines).
+%   \item Never use double rules.
+% \end{enumerate}
+%
+% These guidelines may seem extreme but I have
+% never found a good argument in favour of breaking them. For
+% example, if you feel that the information in the left half of
+% a table is so different from that on the right that it needs
+% to be separated by a vertical line, then you should use two
+% tables instead. Not everyone follows the second guideline:
+%
+% There are three further guidelines worth mentioning here as they
+% are generally not known outside the circle of professional
+% typesetters and subeditors:
+%
+% \begin{enumerate}\setcounter{enumi}{2}
+%   \item Put the units in the column heading (not in the body of
+%           the table).
+%   \item Always precede a decimal point by a digit; thus 0.1
+%       {\em not} just .1.
+%   \item Do not use `ditto' signs or any other such convention to
+%       repeat a previous value. In many circumstances a blank
+%       will serve just as well. If it won't, then repeat the value.
+% \end{enumerate}
+%
+% A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
+%
+%
+% \begin{table}
+% \caption{A badly formatted table}
+% \centering
+% \label{table:bad_table}
+% \begin{tabular}{|l|c|c|c|c|}
+% \hline
+% & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\
+% \hline
+% Dental measurement  & mean & SD  & mean & SD  \\ \hline
+% \hline
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+% \hline
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+% \hline
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+% \hline
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+% \hline
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+% \hline
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \hline
+% \end{tabular}
+% \end{table}
+%
+% \begin{table}
+% \caption{A nice looking table}
+% \centering
+% \label{table:nice_table}
+% \begin{tabular}{l c c c c}
+% \hline
+% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
+% \cline{2-5}
+%   & mean & SD  & mean & SD  \\
+% \hline
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \hline
+% \end{tabular}
+% \end{table}
+%
+%
+% \begin{table}
+% \caption{Even better looking table using booktabs}
+% \centering
+% \label{table:good_table}
+% \begin{tabular}{l c c c c}
+% \toprule
+% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
+% \cmidrule{2-5}
+%   & mean & SD  & mean & SD  \\
+% \midrule
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+=======
+%!TEX root = ../thesis.tex
+%*******************************************************************************
+%****************************** Third Chapter **********************************
+%*******************************************************************************
+% \chapter{Pose estimation using a single camera}%Lateral and height
+%
+% % **************************** Define Graphics   Path **************************
+% \ifpdf
+%     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+% \else
+%     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+% \fi
+% %
+% %   \section{Heading control}
+% %
+% %  \section{Position control law}
+% %  \subsection{plattform and experimental results}
+% %  \subsection{Conclusions}
+% \section{Pose estimation algorithm}
+%
+% \subsection{Vanishing point algorithm}
+% \subsection{Dominant lines detection}
+% \subsection{Lines classification}
+% \subsection{Rotation matrix estimation}
+% \subsection{Principal lines estimation}
+% \subsection{Pose camera estimation}
+%
+% \section{Numerical validation}
+%
+% \section{Conclusions}
+
+
+
+% And now I begin my third chapter here \dots
+%
+% And now to cite some more people~\citet{Rea85,Ancey1996}
+%
+% \subsection{First subsection in the first section}
+% \dots and some more
+%
+% \subsection{Second subsection in the first section}
+% \dots and some more \dots
+%
+% \subsubsection{First subsub section in the second subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it \dots
+%
+% \subsection{Third subsection in the first section}
+% \dots and some more \dots
+%
+% \subsubsection{First subsub section in the third subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it and some more and some more and
+% some more and some more and some more and some more and some more \dots
+%
+% \subsubsection{Second subsub section in the third subsection}
+% \dots and some more in the first subsub section otherwise it all looks the same
+% doesn't it? well we can add some text to it \dots
+%
+% \section{Second section of the third chapter}
+% and here I write more \dots
+%
+% \section{The layout of formal tables}
+% This section has been modified from ``Publication quality tables in \LaTeX*''
+%  by Simon Fear.
+%
+% The layout of a table has been established over centuries of experience and
+% should only be altered in extraordinary circumstances.
+%
+% When formatting a table, remember two simple guidelines at all times:
+%
+% \begin{enumerate}
+%   \item Never, ever use vertical rules (lines).
+%   \item Never use double rules.
+% \end{enumerate}
+%
+% These guidelines may seem extreme but I have
+% never found a good argument in favour of breaking them. For
+% example, if you feel that the information in the left half of
+% a table is so different from that on the right that it needs
+% to be separated by a vertical line, then you should use two
+% tables instead. Not everyone follows the second guideline:
+%
+% There are three further guidelines worth mentioning here as they
+% are generally not known outside the circle of professional
+% typesetters and subeditors:
+%
+% \begin{enumerate}\setcounter{enumi}{2}
+%   \item Put the units in the column heading (not in the body of
+%           the table).
+%   \item Always precede a decimal point by a digit; thus 0.1
+%       {\em not} just .1.
+%   \item Do not use `ditto' signs or any other such convention to
+%       repeat a previous value. In many circumstances a blank
+%       will serve just as well. If it won't, then repeat the value.
+% \end{enumerate}
+%
+% A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
+%
+%
+% \begin{table}
+% \caption{A badly formatted table}
+% \centering
+% \label{table:bad_table}
+% \begin{tabular}{|l|c|c|c|c|}
+% \hline
+% & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\
+% \hline
+% Dental measurement  & mean & SD  & mean & SD  \\ \hline
+% \hline
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+% \hline
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+% \hline
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+% \hline
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+% \hline
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+% \hline
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \hline
+% \end{tabular}
+% \end{table}
+%
+% \begin{table}
+% \caption{A nice looking table}
+% \centering
+% \label{table:nice_table}
+% \begin{tabular}{l c c c c}
+% \hline
+% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
+% \cline{2-5}
+%   & mean & SD  & mean & SD  \\
+% \hline
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \hline
+% \end{tabular}
+% \end{table}
+%
+%
+% \begin{table}
+% \caption{Even better looking table using booktabs}
+% \centering
+% \label{table:good_table}
+% \begin{tabular}{l c c c c}
+% \toprule
+% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
+% \cmidrule{2-5}
+%   & mean & SD  & mean & SD  \\
+% \midrule
+% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
+%
+% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
+%
+% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
+%
+% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
+%
+% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
+%
+% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+>>>>>>> before discard
