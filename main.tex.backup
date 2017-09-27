@@ -25,18 +25,6 @@
 \usepackage{titlesec}
 \usepackage{url}
 
-\usepackage{mathtools}
-\usepackage{relsize,rotating}
-% \usepackage[normal]{subfigure}
-\usepackage{pgfplots}
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-\usepackage{url}
-
-\usepackage{lipsum,multicol}
-
-
-
 %\setcounter{secnumdepth}{4}
 
 \setlength{\columnsep}{0.5cm}
@@ -94,7 +82,6 @@
 
 
 \usepackage[a4paper]{meta-donnees}
-
 \begin{document}
 
 
@@ -181,37 +168,37 @@
 \mainmatter % Ne pas oublier, avec \frontmatter et \backmatter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\chapter*{Introduction}
- \chaptermark{Introduction}
-%
+% %\chapter*{Introduction}
+%  \chaptermark{Introduction}
+% %
 
-\addcontentsline{toc}{chapter}{Introduction}\markboth{INTRODUCTION}{}
-
-\input{Chapter01/introduction.tex}
-
+%\addcontentsline{toc}{chapter}{Introduction}\markboth{INTRODUCTION}{}
 %
- \clearemptydoublepage
- \input{Chapter02/chapter02.tex}
-% %
- \clearemptydoublepage
-% % % \chapter{State of the art of aerial manipulation}
- \input{Chapter03/chapter03.tex}
-% %
-% %
-  \clearemptydoublepage
-% % \chapter{Modeling of a quadcopter carrying a manipulator arm}
-  \input{Chapter04/chapter04.tex}
-% %
-% %
-  \clearemptydoublepage
-% % \chapter{Nonlinear control of a quadcopter carrying a manipulator arm}
-  \input{Chapter05/chapter05}
-
- \clearemptydoublepage
+% \input{Chapter01/introduction.tex}
 %
+% %
+%  \clearemptydoublepage
+%  \input{Chapter02/chapter02.tex}
+% % %
+%  \clearemptydoublepage
+% % % % \chapter{State of the art of aerial manipulation}
+%  %\input{Chapter03/chapter03.tex}
+% % %
+% % %
+%   \clearemptydoublepage
+% % % \chapter{Modeling of a quadcopter carrying a manipulator arm}
+%   \input{Chapter04/chapter04.tex}
+% % %
+% % %
+%   \clearemptydoublepage
+% % % \chapter{Nonlinear control of a quadcopter carrying a manipulator arm}
+%   \input{Chapter05/chapter05}
 %
-% % \chapter{Conclusions and Future work}
- \input{Chapter06/conclusions.tex}
+%  \clearemptydoublepage
+% %
+% %
+% % % \chapter{Conclusions and Future work}
+%  \input{Chapter06/conclusions.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -227,10 +214,10 @@
 %   \label{ap:plat}
 %           \input{platforms}
 
- \include{Appendix1/appendix1}
- \include{Appendix2/appendix2}
- \include{Appendix3/appendix3}
- \include{Appendix4/platforms}
+%  \include{Appendix1/appendix1}
+%  \include{Appendix2/appendix2}
+%  \include{Appendix3/appendix3}
+%  \include{Appendix4/platforms}
 
 
 %\end{appendices}
@@ -249,5 +236,6 @@
 %\newpage
 %\nocite{*}
 %\printbibliography[heading=secondary,keyword=secondary]
+
 
 \end{document}

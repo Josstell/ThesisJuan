@@ -92,14 +92,14 @@ It is known that when using the VPs intrinsic and extrinsic camera parameters ca
 The main point $p$ of the camera is set to the center of the image plane. The rotation matrix
 $(\vec{u},\vec{v},\vec{w})$ transforms points from real world to the image plane. Its columns are the vectors of the world coordinates frame expressed in the camera space. The directions of the three vanishing points from the optical center of the camera are assumed to be orthogonal. Thus without loss of generality, the following relations hold for the final calibrated.
 
-\begin{subequations}
-\begin{align}
-	\label{VectorOrto}
-	f>0 \\
-	\vec{u} \cdot \vec{v}= \vec{v}\cdot \vec{w}=\vec{w}\cdot \vec{u}=0\\
-  	\abs{\vec{u}}=\abs{\vec{v}}=\abs{\vec{w}}
-\end{align}
-\end{subequations}
+% \begin{subequations}
+% \begin{align}
+% 	\label{VectorOrto}
+% 	f>0 \\
+% 	\vec{u} \cdot \vec{v}= \vec{v}\cdot \vec{w}=\vec{w}\cdot \vec{u}=0\\
+%   	\abs{\vec{u}}=\abs{\vec{v}}=\abs{\vec{w}}
+% \end{align}
+% \end{subequations}
 
 The obtained structured lines  from the corridor image provide enough information to estimate the camera rotation matrix.
 Normally, it is supposed that the camera has a vertical position, and  as the corridor is plenty of vertical and horizontal lines, then it is possible to find a finite vanishing point and two infinite vanishing points.
@@ -248,387 +248,64 @@ para esto necesito una secuencia de estas figuras separadas (cada figura separad
 
 \section{Numerical validation}
 %
-%
-% The previous algorithm for pose estimation was firstly tested off-line. For corroborating equations (\ref{crossLines13}) and (\ref{crossLines24}) a sequence of images where taken with specified  movements as shown in Figures \ref{camera up and down} and \ref{camera right and left}.
-%
-% \begin{figure} [h!]
-% \centering
-% \includegraphics[scale=0.5]{Chapter03/Images/CentreFrames_m.png}
-% \caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move up, 3) returns to the middle, 4) move down and 5) returns to the middle. }
-% \label{camera up and down}
-% \end{figure}
-%
-%
-% \begin{figure} [h!]
-% \centering
-% \includegraphics[scale=0.5]{Chapter03/Images/Lateral_m.png}
-% \caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move rigth, 3) returns to the middle, 4) move left and 5) returns to the middle. }
-% \label{camera right and left}
-% \end{figure}
 
-% The experiment was to place the camera in the middle of the corridor and moves it firstly up and down (Figure \ref{camera up and down}) and after right and left (Figure \ref{camera right and left}). These movements can be represented via principal lines in the image and observed graphically in Figures  \ref{fig:CentreFrames} and \ref{fig:lateralFRames}, where the cross product between $L_{Q_i}$ are represented, see (\ref{crossLines13}) and (\ref{crossLines24}). On one hand, notice for example from Figure \ref{fig:CentreFrames}  that both cross products have the same behavior and when if the camera is moved up the lines representing $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ increase and when the camera is moved down they decrease, representing then the good camera's behavior. On the other hand, when the camera is moved right and left, then the cross product between $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ are different (see Figure  \ref{fig:lateralFRames}), nevertheless this information gives necessary data to estimate the $y$ position, as can be seen in Figure  \ref{fig:XYlateral}. Observe in this figure that when the camera is moved right the $y$ estimation is negative and if it is moved left, then a $y$ positive response is obtained. In addition note that $z$ estimation remains quasi-constant. Similarly for Figure \ref{fig:XYcentre} where with the up and down camera's movements the $z$ state is estimated, observe also that $y$ estimation is also quasi-constant.
-%
-%
-%
-% \begin{figure}[h!]
-%         \centering
-%     \subfigure[Frames position and cross product, the camera is moving up and down ]
-%     {
-%       \input{Imagenes/centreCross.tex}
-%       \label{fig:CentreFrames}
-%     }
-%     \subfigure[Relative position]
-%     {
-%       \input{Imagenes/centreXY.tex}
-%       \label{fig:XYcentre}
-%      }
-%           \caption{(a) Cross product between principal lines of a corridor, (b)
-%           relative position between the cross product and the principal lines }
-%     \label{fig:centrePosition}
-%   \end{figure}
-%
-%
-%
-%   \begin{figure}[!h]
-%   \centering
-%     \subfigure[Frames position and cross product, the camera is moving from right to left]
-%     {
-%       \input{Imagenes/LateralCross.tex}
-%       \label{fig:lateralFRames}
-%     }
-%     \subfigure[Relative position]
-%     {
-%       \input{Imagenes/LateralXY.tex}
-%       \label{fig:XYlateral}
-%      }
-%           \caption{(a) Cross product between principal lines of a corridor, (b)
-%           relative position between the cross product and the principal lines }
-%     \label{fig:LateralPosition}
-%   \end{figure}
-%
-%   \color{black}
+The previous algorithm for pose estimation was firstly tested off-line. For corroborating equations (\ref{crossLines13}) and (\ref{crossLines24}) a sequence of images where taken with specified  movements as shown in Figures \ref{camera up and down} and \ref{camera right and left}.
+
+\begin{figure} [h!]
+\centering
+\includegraphics[scale=0.5]{Chapter03/Images/CentreFrames_m.png}
+\caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move up, 3) returns to the middle, 4) move down and 5) returns to the middle. }
+\label{camera up and down}
+\end{figure}
+
+
+\begin{figure} [h!]
+\centering
+\includegraphics[scale=0.5]{Chapter03/Images/Lateral_m.png}
+\caption{Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move rigth, 3) returns to the middle, 4) move left and 5) returns to the middle. }
+\label{camera right and left}
+\end{figure}
+
+The experiment was to place the camera in the middle of the corridor and moves it firstly up and down (Figure \ref{camera up and down}) and after right and left (Figure \ref{camera right and left}). These movements can be represented via principal lines in the image and observed graphically in Figures  \ref{fig:CentreFrames} and \ref{fig:lateralFRames}, where the cross product between $L_{Q_i}$ are represented, see (\ref{crossLines13}) and (\ref{crossLines24}). On one hand, notice for example from Figure \ref{fig:CentreFrames}  that both cross products have the same behavior and when if the camera is moved up the lines representing $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ increase and when the camera is moved down they decrease, representing then the good camera's behavior. On the other hand, when the camera is moved right and left, then the cross product between $L_{Q_1}\wedge L_{Q_3}$  and $L_{Q_4}\wedge L_{Q_2}$ are different (see Figure  \ref{fig:lateralFRames}), nevertheless this information gives necessary data to estimate the $y$ position, as can be seen in Figure  \ref{fig:XYlateral}. Observe in this figure that when the camera is moved right the $y$ estimation is negative and if it is moved left, then a $y$ positive response is obtained. In addition note that $z$ estimation remains quasi-constant. Similarly for Figure \ref{fig:XYcentre} where with the up and down camera's movements the $z$ state is estimated, observe also that $y$ estimation is also quasi-constant.
+
+
+
+\begin{figure}[h!]
+        \centering
+        \input{Chapter03/Images/centreCross.tex}
+   \caption{Frames position and cross product, the camera is moving up and down}
+    \label{fig:CentreFrames}
+ \end{figure}
+   
+      
+\begin{figure}[h!]
+        \centering
+      \input{Chapter03/Images/centreXY.tex}
+      \label{fig:XYcentre}
+      \caption{Relative position} 
+      %Cross product between principal lines of a corridor, (b)
+      %    relative position between the cross product and the principal lines }
+    \label{fig:centrePosition}
+  \end{figure}
+
+
+
+  \begin{figure}[!h]
+  \centering
+     \input{Chapter03/Images/LateralCross.tex}
+      \caption{Frames position and cross product, the camera is moving from right to left}
+      \label{fig:lateralFRames}
+   \end{figure}
+
+    
+  \begin{figure}[!h]
+  \centering
+      \input{Chapter03/Images/LateralXY.tex}
+      \caption{Relative position between the cross product and the principal lines }
+    \label{fig:LateralPosition}
+  \end{figure}
+
+  \color{black}
 %
 
 \section{Conclusions}
-
-
-
-% And now I begin my third chapter here \dots
-%
-% And now to cite some more people~\citet{Rea85,Ancey1996}
-%
-% \subsection{First subsection in the first section}
-% \dots and some more
-%
-% \subsection{Second subsection in the first section}
-% \dots and some more \dots
-%
-% \subsubsection{First subsub section in the second subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it \dots
-%
-% \subsection{Third subsection in the first section}
-% \dots and some more \dots
-%
-% \subsubsection{First subsub section in the third subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it and some more and some more and
-% some more and some more and some more and some more and some more \dots
-%
-% \subsubsection{Second subsub section in the third subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it \dots
-%
-% \section{Second section of the third chapter}
-% and here I write more \dots
-%
-% \section{The layout of formal tables}
-% This section has been modified from ``Publication quality tables in \LaTeX*''
-%  by Simon Fear.
-%
-% The layout of a table has been established over centuries of experience and
-% should only be altered in extraordinary circumstances.
-%
-% When formatting a table, remember two simple guidelines at all times:
-%
-% \begin{enumerate}
-%   \item Never, ever use vertical rules (lines).
-%   \item Never use double rules.
-% \end{enumerate}
-%
-% These guidelines may seem extreme but I have
-% never found a good argument in favour of breaking them. For
-% example, if you feel that the information in the left half of
-% a table is so different from that on the right that it needs
-% to be separated by a vertical line, then you should use two
-% tables instead. Not everyone follows the second guideline:
-%
-% There are three further guidelines worth mentioning here as they
-% are generally not known outside the circle of professional
-% typesetters and subeditors:
-%
-% \begin{enumerate}\setcounter{enumi}{2}
-%   \item Put the units in the column heading (not in the body of
-%           the table).
-%   \item Always precede a decimal point by a digit; thus 0.1
-%       {\em not} just .1.
-%   \item Do not use `ditto' signs or any other such convention to
-%       repeat a previous value. In many circumstances a blank
-%       will serve just as well. If it won't, then repeat the value.
-% \end{enumerate}
-%
-% A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
-%
-%
-% \begin{table}
-% \caption{A badly formatted table}
-% \centering
-% \label{table:bad_table}
-% \begin{tabular}{|l|c|c|c|c|}
-% \hline
-% & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\
-% \hline
-% Dental measurement  & mean & SD  & mean & SD  \\ \hline
-% \hline
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-% \hline
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-% \hline
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-% \hline
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-% \hline
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-% \hline
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \hline
-% \end{tabular}
-% \end{table}
-%
-% \begin{table}
-% \caption{A nice looking table}
-% \centering
-% \label{table:nice_table}
-% \begin{tabular}{l c c c c}
-% \hline
-% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
-% \cline{2-5}
-%   & mean & SD  & mean & SD  \\
-% \hline
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-%
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-%
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-%
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-%
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-%
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \hline
-% \end{tabular}
-% \end{table}
-%
-%
-% \begin{table}
-% \caption{Even better looking table using booktabs}
-% \centering
-% \label{table:good_table}
-% \begin{tabular}{l c c c c}
-% \toprule
-% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
-% \cmidrule{2-5}
-%   & mean & SD  & mean & SD  \\
-% \midrule
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-%
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-%
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-%
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-%
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-%
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-=======
-%!TEX root = ../thesis.tex
-%*******************************************************************************
-%****************************** Third Chapter **********************************
-%*******************************************************************************
-% \chapter{Pose estimation using a single camera}%Lateral and height
-%
-% % **************************** Define Graphics   Path **************************
-% \ifpdf
-%     \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
-% \else
-%     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
-% \fi
-% %
-% %   \section{Heading control}
-% %
-% %  \section{Position control law}
-% %  \subsection{plattform and experimental results}
-% %  \subsection{Conclusions}
-% \section{Pose estimation algorithm}
-%
-% \subsection{Vanishing point algorithm}
-% \subsection{Dominant lines detection}
-% \subsection{Lines classification}
-% \subsection{Rotation matrix estimation}
-% \subsection{Principal lines estimation}
-% \subsection{Pose camera estimation}
-%
-% \section{Numerical validation}
-%
-% \section{Conclusions}
-
-
-
-% And now I begin my third chapter here \dots
-%
-% And now to cite some more people~\citet{Rea85,Ancey1996}
-%
-% \subsection{First subsection in the first section}
-% \dots and some more
-%
-% \subsection{Second subsection in the first section}
-% \dots and some more \dots
-%
-% \subsubsection{First subsub section in the second subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it \dots
-%
-% \subsection{Third subsection in the first section}
-% \dots and some more \dots
-%
-% \subsubsection{First subsub section in the third subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it and some more and some more and
-% some more and some more and some more and some more and some more \dots
-%
-% \subsubsection{Second subsub section in the third subsection}
-% \dots and some more in the first subsub section otherwise it all looks the same
-% doesn't it? well we can add some text to it \dots
-%
-% \section{Second section of the third chapter}
-% and here I write more \dots
-%
-% \section{The layout of formal tables}
-% This section has been modified from ``Publication quality tables in \LaTeX*''
-%  by Simon Fear.
-%
-% The layout of a table has been established over centuries of experience and
-% should only be altered in extraordinary circumstances.
-%
-% When formatting a table, remember two simple guidelines at all times:
-%
-% \begin{enumerate}
-%   \item Never, ever use vertical rules (lines).
-%   \item Never use double rules.
-% \end{enumerate}
-%
-% These guidelines may seem extreme but I have
-% never found a good argument in favour of breaking them. For
-% example, if you feel that the information in the left half of
-% a table is so different from that on the right that it needs
-% to be separated by a vertical line, then you should use two
-% tables instead. Not everyone follows the second guideline:
-%
-% There are three further guidelines worth mentioning here as they
-% are generally not known outside the circle of professional
-% typesetters and subeditors:
-%
-% \begin{enumerate}\setcounter{enumi}{2}
-%   \item Put the units in the column heading (not in the body of
-%           the table).
-%   \item Always precede a decimal point by a digit; thus 0.1
-%       {\em not} just .1.
-%   \item Do not use `ditto' signs or any other such convention to
-%       repeat a previous value. In many circumstances a blank
-%       will serve just as well. If it won't, then repeat the value.
-% \end{enumerate}
-%
-% A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
-%
-%
-% \begin{table}
-% \caption{A badly formatted table}
-% \centering
-% \label{table:bad_table}
-% \begin{tabular}{|l|c|c|c|c|}
-% \hline
-% & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\
-% \hline
-% Dental measurement  & mean & SD  & mean & SD  \\ \hline
-% \hline
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-% \hline
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-% \hline
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-% \hline
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-% \hline
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-% \hline
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \hline
-% \end{tabular}
-% \end{table}
-%
-% \begin{table}
-% \caption{A nice looking table}
-% \centering
-% \label{table:nice_table}
-% \begin{tabular}{l c c c c}
-% \hline
-% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
-% \cline{2-5}
-%   & mean & SD  & mean & SD  \\
-% \hline
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-%
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-%
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-%
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-%
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-%
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \hline
-% \end{tabular}
-% \end{table}
-%
-%
-% \begin{table}
-% \caption{Even better looking table using booktabs}
-% \centering
-% \label{table:good_table}
-% \begin{tabular}{l c c c c}
-% \toprule
-% \multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\
-% \cmidrule{2-5}
-%   & mean & SD  & mean & SD  \\
-% \midrule
-% I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-%
-% I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-%
-% I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-%
-% I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-%
-% CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-%
-% CBL & 11.88 & 0.05 & 13.11 & 0.04\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
->>>>>>> before discard

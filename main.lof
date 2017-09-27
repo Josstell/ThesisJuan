@@ -1,23 +1,30 @@
 \select@language {english}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces The different categories of drones.\relax }}{3}{figure.caption.4}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces An Apache attack helicopter\relax }}{4}{figure.caption.5}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces (a)Quadcopter and (b)octocopter configurations, courtesy of (\cite {website:dji})\relax }}{4}{figure.caption.6}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Autogyro MT-03 in flight\relax }}{4}{figure.caption.7}
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Gyrodyne AM-X3 in flight\relax }}{5}{figure.caption.8}
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Convertiplane\relax }}{5}{figure.caption.9}
-\contentsline {figure}{\numberline {1.7}{\ignorespaces Tail-sitter prototypes, as part of the Google\IeC {\^a}\IeC {\texteuro }\IeC {\texttrademark }s project Wing for delivery\relax }}{6}{figure.caption.10}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces F-35 Lighting II combat aircraft during take off\relax }}{6}{figure.caption.11}
-\contentsline {figure}{\numberline {1.9}{\ignorespaces Scheme of the quadrotor configuration: inertial reference frame $N(x_n,y_n,z_n)$, the reference body fixed frame $B(x_b,y_b,z_b)$, the $f_i$ forces on each motor, angular velocity of the motors $s_{i}$ and the reaction torques $Q_i$.\relax }}{8}{figure.caption.12}
-\contentsline {figure}{\numberline {1.10}{\ignorespaces Roll ($\phi $), pitch ($\theta $), yaw ($\psi $) and space displacement\relax }}{9}{figure.caption.13}
-\contentsline {figure}{\numberline {1.11}{\ignorespaces Two coordinate frames, a point $p$, and two vectors $\upsilon _1$ and $\upsilon _2$, (\cite {Spong:2004}).\relax }}{10}{figure.caption.14}
-\contentsline {figure}{\numberline {1.12}{\ignorespaces Inertial and mobile frame of a rigid body.\relax }}{10}{figure.caption.15}
-\contentsline {figure}{\numberline {1.13}{\ignorespaces Euler angles.\relax }}{13}{figure.caption.16}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces These images introduce the applied methodology. The scene is a corridor and an image is taken from the video to extract a set of lines that could describe geometrically the environment and the rotation matrix. Four new subsets of lines are made taking into account the vanishing point (quadrant 1, 2, 3 and 4). The information of each quadrant is used to obtain the principal lines (LQ1, LQ2, LQ3, LQ4). \relax }}{22}{figure.caption.17}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Camera calibration with one finite and two infinite vanishing points. $(x_c,y_c,z_c)$ is the camera coordinate frame, $(\mathaccentV {vec}17E{u},\mathaccentV {vec}17E{v},\mathaccentV {vec}17E{w})$ the world coordinate frame, $VP$ the finite vanishing point, $\mathaccentV {vec}17E{I_1}$ and $\mathaccentV {vec}17E{I_2}$ the infinite vanishing point directions. $P$ is the main point.\relax }}{25}{figure.caption.18}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces $\mathaccentV {vec}17E{u}$ estimation from the infinite vanishing points.\relax }}{26}{figure.caption.19}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces $\mathaccentV {vec}17E{v}$ estimation from the infinite vanishing points.\relax }}{27}{figure.caption.20}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The different categories of drones.\relax }}{5}{figure.caption.4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces An Apache attack helicopter\relax }}{6}{figure.caption.5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces (a)Quadcopter and (b)octocopter configurations, courtesy of (\cite {website:dji})\relax }}{6}{figure.caption.6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Autogyro MT-03 in flight\relax }}{6}{figure.caption.7}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Gyrodyne AM-X3 in flight\relax }}{7}{figure.caption.8}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Convertiplane\relax }}{7}{figure.caption.9}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Tail-sitter prototypes, as part of the Google\IeC {\^a}\IeC {\texteuro }\IeC {\texttrademark }s project Wing for delivery\relax }}{8}{figure.caption.10}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces F-35 Lighting II combat aircraft during take off\relax }}{8}{figure.caption.11}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Scheme of the quadrotor configuration: inertial reference frame $N(x_n,y_n,z_n)$, the reference body fixed frame $B(x_b,y_b,z_b)$, the $f_i$ forces on each motor, angular velocity of the motors $s_{i}$ and the reaction torques $Q_i$.\relax }}{10}{figure.caption.12}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Roll ($\phi $), pitch ($\theta $), yaw ($\psi $) and space displacement\relax }}{11}{figure.caption.13}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Two coordinate frames, a point $p$, and two vectors $\upsilon _1$ and $\upsilon _2$, (\cite {Spong:2004}).\relax }}{12}{figure.caption.14}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Inertial and mobile frame of a rigid body.\relax }}{13}{figure.caption.15}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Euler angles.\relax }}{15}{figure.caption.16}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces These images introduce the applied methodology. The scene is a corridor and an image is taken from the video to extract a set of lines that could describe geometrically the environment and the rotation matrix. Four new subsets of lines are made taking into account the vanishing point (quadrant 1, 2, 3 and 4). The information of each quadrant is used to obtain the principal lines (LQ1, LQ2, LQ3, LQ4). \relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Camera calibration with one finite and two infinite vanishing points. $(x_c,y_c,z_c)$ is the camera coordinate frame, $(\mathaccentV {vec}17E{u},\mathaccentV {vec}17E{v},\mathaccentV {vec}17E{w})$ the world coordinate frame, $VP$ the finite vanishing point, $\mathaccentV {vec}17E{I_1}$ and $\mathaccentV {vec}17E{I_2}$ the infinite vanishing point directions. $P$ is the main point.\relax }}{27}{figure.caption.18}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces $\mathaccentV {vec}17E{u}$ estimation from the infinite vanishing points.\relax }}{28}{figure.caption.19}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces $\mathaccentV {vec}17E{v}$ estimation from the infinite vanishing points.\relax }}{29}{figure.caption.20}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move up, 3) returns to the middle, 4) move down and 5) returns to the middle. \relax }}{30}{figure.caption.21}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Pictures with a camera in the middle of a corridor. The test was: 1) stay at the middle, 2) move rigth, 3) returns to the middle, 4) move left and 5) returns to the middle. \relax }}{30}{figure.caption.22}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Frames position and cross product, the camera is moving up and down\relax }}{31}{figure.caption.23}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Relative position\relax }}{31}{figure.caption.24}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Frames position and cross product, the camera is moving from right to left\relax }}{31}{figure.caption.25}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Relative position between the cross product and the principal lines \relax }}{32}{figure.caption.26}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
